@@ -424,43 +424,33 @@
 
         const sections = gsap.utils.toArray('.section');
 
-
         sections.forEach((section, index) => {
+            const content = section.querySelector(".content");
+            
             if (index < sections.length - 1) {
+
                 ScrollTrigger.create({
                     trigger: section,
                     start: "top top",
-                    end: "+=100%",
+                    endTrigger: sections[sections.length - 1],
+                    end: "top top",
                     pin: true,
                     pinSpacing: false,
-                    pinType: "transform",
                 });
-            }
-        });
 
-        sections.forEach((section, index) => {
-            if (index > 0) {
+
                 ScrollTrigger.create({
-                    trigger: section,
+                    trigger: sections[index + 1],
                     start: "top bottom",
                     end: "top top",
-                    scrub: true,
                     onUpdate: (self) => {
-                        const prevSection = sections[index - 1];
-                        const prevSectionContent = prevSection.querySelector(".content");
                         const progress = self.progress;
-                        const opacity = 1 - progress;
-                        const translateY = -25 * progress;
-                        const translateZ = -800 * progress;
-                        const rotateX = 80 * progress;
-
-                        gsap.set(prevSectionContent, {
-                            opacity: opacity,
-                            transform: `
-                                translateY(${translateY}%)
-                                translateZ(${translateZ}px)
-                                rotateX(${rotateX}deg)
-                            `
+                        
+                        gsap.set(content, {
+                            opacity: 1 - progress,
+                            y: `-${25 * progress}%`,
+                            z: -800 * progress,
+                            rotationX: 80 * progress,
                         });
                     }
                 });
