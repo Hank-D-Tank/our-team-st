@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Section ST</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        width: 100vw;
+        overflow-x: hidden;
+        background: #160F03;
+    }
+
+    .container {
+        width: 100%;
+    }
+    
+    .section-container {
+        width: 100%;
+    }
+    
+
+    section {
+        height: 100vh;
+        width: 100%;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        height: 80%;
+        width: 35%;
+        min-width: 380px;
+        max-width: 500px;
+        aspect-ratio: 9 / 14;
+        transform-origin: center center;
+        border-radius: 2rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .content img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+    section.intro .intro-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    section.intro h2 {
+        font-family: 'Syne', sans-serif;
+        font-weight: 800;
+        font-size: 5rem;
+        letter-spacing: -0.02em;
+        background: linear-gradient(135deg, #FF6B35 0%, #F7C59F 50%, #fff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+        margin-top: auto;
+    }
+
+    section.intro p {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        max-width: 500px;
+        line-height: 1.5;
+        letter-spacing: 0.02em;
+    }
+
+    .line {
+        height: 12rem;
+        width: 1px;
+        margin-top: auto;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .line::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.6), transparent);
+        animation: lineScroll 2s ease-in-out infinite;
+    }
+
+    @keyframes lineScroll {
+        0% {
+            top: -100%;
+        }
+        100% {
+            top: 100%;
+        }
+    }
+
+
+    .card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.4) 30%,
+            transparent 60%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2.5rem;
+        font-family: 'Syne', sans-serif;
+    }
+
+    .card-info {
+        transform: translateY(0);
+    }
+
+    .card-number {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-name {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-role {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+    }
+
+    .card-divider {
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(90deg, #FF6B35, #F7C59F);
+        margin: 1rem 0;
+        border-radius: 2px;
+    }
+
+    .card-quote {
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        font-style: italic;
+        line-height: 1.5;
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+        .content {
+            width: 50%;
+            min-width: 280px;
+            max-width: 360px;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .content {
+            width: 85%;
+            min-width: unset;
+            max-width: unset;
+            border-radius: 1.5rem;
+        }
+
+        section {
+            padding: 1rem;
+        }
+
+        section.intro h2 {
+            font-size: 3rem;
+        }
+
+        section.intro p {
+            font-size: 1rem;
+            padding: 0 1rem;
+        }
+
+        .line {
+            height: 8rem;
+        }
+
+        .card-overlay {
+            padding: 2rem;
+        }
+
+        .card-name {
+            font-size: 1.6rem;
+        }
+
+        .card-role {
+            font-size: 0.85rem;
+        }
+
+        .card-quote {
+            font-size: 0.75rem;
+        }
+    }
+
+    /* Small mobile */
+    @media (max-width: 480px) {
+        .content {
+            width: 92%;
+            height: 75%;
+            border-radius: 1rem;
+        }
+
+        .card-overlay {
+            padding: 1.5rem;
+        }
+
+        .card-name {
+            font-size: 1.4rem;
+        }
+
+        .card-number {
+            font-size: 0.65rem;
+        }
+
+        .card-role {
+            font-size: 0.8rem;
+        }
+
+        .card-quote {
+            font-size: 0.7rem;
+        }
+
+        .card-divider {
+            width: 30px;
+            height: 2px;
+            margin: 0.75rem 0;
+        }
+
+        .line {
+            height: 6rem;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+    <section class="intro">
+        <div class="intro-content">
+            <h2>Our Team</h2>
+            <p>The creative minds behind the magic. Meet the talented individuals who turn ideas into reality.</p>
+            <div class="line"></div>
+        </div>
+    </section>
+
+        <div class="section-container">
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/736x/13/a4/15/13a415c3b4802c47529afe9c15179b12.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">01 / 08</span>
+                            <h2 class="card-name">Marcus Chen</h2>
+                            <p class="card-role">Lead Frontend Engineer</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"Clean code is not written by following rules. It's written by caring."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/736x/53/ae/15/53ae15903bc6e5a41bbea4d4efbd756f.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">02 / 08</span>
+                            <h2 class="card-name">Elena Voss</h2>
+                            <p class="card-role">UX Design Lead</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"Design is intelligence made visible."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/1200x/3f/30/9e/3f309e9aa079d1685061bc50c8a9ef39.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">03 / 08</span>
+                            <h2 class="card-name">James Okonkwo</h2>
+                            <p class="card-role">Backend Architect</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"Simplicity is the ultimate sophistication."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/1200x/65/32/a5/6532a5afa2fedcc04b895adda337d69a.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">04 / 08</span>
+                            <h2 class="card-name">Sofia Reyes</h2>
+                            <p class="card-role">DevOps Engineer</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"Automate everything. Question nothing."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/736x/98/d7/5f/98d75f5a0780c851ee66d717c1e993ac.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">05 / 08</span>
+                            <h2 class="card-name">Ava Mitchell</h2>
+                            <p class="card-role">Product Manager</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"Ship fast. Learn faster."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/736x/6f/fd/a1/6ffda1b7b861e0e1e7f31140289303b0.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">06 / 08</span>
+                            <h2 class="card-name">Kai Tanaka</h2>
+                            <p class="card-role">Mobile Developer</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"Every pixel tells a story."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/1200x/6c/71/51/6c7151dd37a0229f49e7ca46eecdc6e9.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">07 / 08</span>
+                            <h2 class="card-name">Liam Foster</h2>
+                            <p class="card-role">Security Engineer</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"Trust no one. Verify everything."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="content">
+                    <img src="https://i.pinimg.com/736x/22/86/25/228625a239a9de5fe6482cc80bfdd439.jpg" alt="">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <span class="card-number">08 / 08</span>
+                            <h2 class="card-name">Nina Patel</h2>
+                            <p class="card-role">Data Scientist</p>
+                            <div class="card-divider"></div>
+                            <p class="card-quote">"In data we trust. In models we verify."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+        integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"
+        integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js"></script>
+
+    <script>
+        const lenis = new Lenis();
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000); 
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        const sections = gsap.utils.toArray('.section');
+
+
+        sections.forEach((section, index) => {
+            if (index < sections.length - 1) {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top top",
+                    end: "+=100%",
+                    pin: true,
+                    pinSpacing: false,
+                    pinType: "transform",
+                });
+            }
+        });
+
+        sections.forEach((section, index) => {
+            if (index > 0) {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top bottom",
+                    end: "top top",
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const prevSection = sections[index - 1];
+                        const prevSectionContent = prevSection.querySelector(".content");
+                        const progress = self.progress;
+                        const opacity = 1 - progress;
+                        const translateY = -25 * progress;
+                        const translateZ = -800 * progress;
+                        const rotateX = 80 * progress;
+
+                        gsap.set(prevSectionContent, {
+                            opacity: opacity,
+                            transform: `
+                                translateY(${translateY}%)
+                                translateZ(${translateZ}px)
+                                rotateX(${rotateX}deg)
+                            `
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
